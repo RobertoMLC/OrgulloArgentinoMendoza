@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orgullo Argentino</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Poppins',sans-serif;
+    background:#111;
+    color:#f5f5f5;
+    overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.hero h1{
+    font-size:3rem;
+    letter-spacing:4px;
+    animation:fadeIn 2s ease forwards;
+    opacity:0;
+}
+@keyframes fadeIn{
+    to{opacity:1; transform:translateY(0);}
+
+}
+.hero-text{
+    text-align:center;
+}
+
+.hero-text{
+    text-align:center;
+}
+
+.subtitle{
+    font-family:'Allura', cursive;
+    font-size:3.5rem;
+    margin-top:25px;
+    color:#ffffff;
+    opacity:0;
+    transform:translateY(20px);
+    animation:
+        smoothReveal 1.5s ease forwards 2s,
+        handwriting 3s ease forwards 2s;
+}
+
+/* Aparición suave */
+@keyframes smoothReveal{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Efecto escritura tipo firma */
+@keyframes handwriting{
+    0%{
+        letter-spacing:-10px;
+        filter:blur(10px);
+    }
+    100%{
+        letter-spacing:1px;
+        filter:blur(0);
+    }
+}
+
+/* Aparece */
+@keyframes fadeSubtitle{
+    to{opacity:1;}
+}
+
+/* Efecto escritura */
+@keyframes typing{
+    from{width:0;}
+    to{width:100%;}
+}
+
+/* Cursor parpadeo */
+@keyframes blink{
+    50%{border-color:transparent;}
+}
+
+/* CARRUSEL */
+.carousel{
+    position:relative;
+    width:100%;
+    height:400px;
+    overflow:hidden;
+}
+.carousel img{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity 2s ease-in-out;
+}
+.carousel img.active{opacity:1;}
+
+/* NOTA */
+.note{
+    padding:60px 10%;
+    text-align:center;
+    font-style:italic;
+    color:#ddd;
+}
+
+/* SECCIONES */
+.menu-sections{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    padding:40px 10%;
+}
+/* SOBRE NOSOTROS */
+.about{
+    padding:80px 10%;
+    background:#141414;
+    text-align:center;
+}
+
+.about h2{
+    font-size:2.5rem;
+    margin-bottom:30px;
+}
+
+.about-text{
+    max-width:700px;
+    margin:0 auto 40px auto;
+    font-size:1.2rem;
+    line-height:1.8;
+    color:#ddd;
+}
+
+.location{
+    margin:40px 0;
+}
+
+.hours{
+    margin-top:40px;
+}
+
+.hours ul{
+    list-style:none;
+    padding:0;
+    font-size:1.1rem;
+    line-height:2;
+}
+
+.hours li{
+    background:#1f1f1f;
+    margin:8px auto;
+    padding:10px;
+    max-width:400px;
+    border-radius:8px;
+}
+
+.about-buttons{
+    margin-top:40px;
+}
+/* WRAPPER MENU */
+.menu-wrapper{
+    padding:80px 10%;
+    background:#111;
+    text-align:center;
+}
+
+.menu-title{
+    font-size:2.5rem;
+    margin-bottom:40px;
+    letter-spacing:3px;
+}
+
+/* TEXTO LINK MENU */
+.menu-link-text{
+    margin-top:30px;
+    font-size:1rem;
+    color:#ccc;
+}
+
+/* BOTON IR AL MENU */
+.menu-btn{
+    margin-top:15px;
+    background:#ffffff;
+    color:#111;
+    padding:14px 30px;
+    border-radius:50px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.menu-btn:hover{
+    background:#e0e0e0;
+    transform:scale(1.05);
+}
+
+.contact-btn{
+    background:#25D366;
+    font-size:1.1rem;
+    padding:15px 35px;
+    border-radius:50px;
+    transition:0.3s;
+}
+
+.contact-btn:hover{
+    background:#1ebe5d;
+    transform:scale(1.05);
+}
+.logo-card{
+    background:linear-gradient(145deg,#1c1c1c,#151515);
+    padding:30px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:all 0.4s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    border:1px solid rgba(255,255,255,0.05);
+    position:relative;
+    overflow:hidden;
+}
+
+.logo-card img{
+    width:100%;
+    max-height:150px;
+    object-fit:contain;
+    transition:transform 0.4s ease;
+}
+
+/* Hover elegante */
+.logo-card:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 20px 50px rgba(0,0,0,0.7);
+}
+
+/* Zoom leve del logo */
+.logo-card:hover img{
+    transform:scale(1.05);
+}
+
+/* Brillo premium */
+.logo-card::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.15),
+        transparent
+    );
+}
+
+.logo-card:hover::after{
+    animation:shine 0.9s ease;
+}
+
+@keyframes shine{
+    from{left:-100%;}
+    to{left:100%;}
+}
+.menu-card:hover{background:#2a2a2a; transform:translateY(-5px);}
+
+/* MODAL */
+.modal{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.8);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    visibility:hidden;
+    transition:0.4s;
+}
+.modal.active{
+    opacity:1;
+    visibility:visible;
+}
+.modal-content{
+    background:#1a1a1a;
+    padding:30px;
+    border-radius:10px;
+    width:90%;
+    max-width:500px;
+    transform:scale(0.8);
+    transition:0.4s;
+}
+.modal.active .modal-content{
+    transform:scale(1);
+}
+.modal h3{text-align:center;margin-bottom:20px;}
+.item{
+    background:linear-gradient(145deg,#2a2a2a,#1f1f1f);
+    padding:18px 20px;
+    margin:15px 0;
+    border-radius:10px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:1.1rem;
+    font-weight:500;
+    letter-spacing:0.5px;
+    transition:all 0.25s ease;
+    box-shadow:0 4px 10px rgba(0,0,0,0.4);
+    border:1px solid rgba(255,255,255,0.05);
+    position:relative;
+    overflow:hidden;
+}
+
+/* Hover elegante */
+.item:hover{
+    background:linear-gradient(145deg,#333,#252525);
+    transform:translateY(-3px);
+    box-shadow:0 8px 18px rgba(0,0,0,0.6);
+}
+
+/* efecto presión */
+.item:active{
+    transform:scale(0.97);
+}
+
+/* capa brillo */
+.item::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.8),
+        transparent
+    );
+}
+.epic-line{
+    background:linear-gradient(145deg,#4b0082,#2e0057);
+    color:#fff;
+    font-weight:600;
+}
+
+.rare-line{
+    background:linear-gradient(145deg,#0066ff,#003d99);
+    color:#fff;
+    font-weight:600;
+}
+
+.common-line{
+    background:linear-gradient(145deg,#b30000,#660000);
+    color:#fff;
+    font-weight:600;
+}
+
+/* animación cuando tiene clase */
+.item.flash::after{
+    animation:flashMove 0.6s ease;
+}
+
+@keyframes flashMove{
+    from{left:-100%;}
+    to{left:100%;}
+}
+.close{
+    text-align:right;
+    cursor:pointer;
+    font-size:1.2rem;
+}
+
+/* CARRITO */
+.cart{
+    padding:40px 10%;
+    background:#1a1a1a;
+}
+/* DATOS CLIENTE */
+.client-data{
+    margin:25px 0;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.client-data input,
+.client-data textarea{
+    padding:12px;
+    border-radius:8px;
+    border:none;
+    font-size:1rem;
+    background:#2a2a2a;
+    color:#fff;
+}
+
+.client-data input:focus,
+.client-data textarea:focus{
+    outline:2px solid #25D366;
+}
+
+.client-data textarea{
+    resize:none;
+    height:80px;
+}
+.cart ul{list-style:none;margin:20px 0;}
+.total{font-weight:bold;font-size:1.2rem;}
+button{
+    padding:12px 25px;
+    background:#c0392b;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+button:hover{background:#e74c3c;}
+</style>
+</head>
+
+<body>
+<section class="hero">
+    <div class="hero-text">
+        <h1>Orgullo Argentino</h1>
+        <p class="subtitle" id="premiumText">Roticeria Premium</p>
+    </div>
+</section>
+<!-- SOBRE NOSOTROS -->
+<section class="about" id="about">
+    <h2>Sobre Nosotros</h2>
+    <!--
+        Somos un emprendimiento familiar radicado en Guaymallén, Mendoza y hacemos sentir a nuestros queridos clientes una parte más de nosotros.
+        <p class="about-text">
+    </p>
+    -->
+    <p class="about-text">
+        Nuestra modalidad de trabajo es TAKE AWAY y DELIVERY, por lo que no contamos con mesas para sentarse a comer. Sin embargo, nos esforzamos al máximo para que cada pedido llegue a tu puerta con la mejor calidad y sabor.
+    </p>
+    <div class="about-buttons">
+        <button onclick="enviarWhatsApp()" class="contact-btn">
+            Hacer Pedido / Contactarnos
+        </button>
+        <p class="menu-link-text">
+    Si querés ver nuestro menú y organizar tu pedido por esta página puedes tocar aquí
+</p>
+<button onclick="irAlMenu()" class="menu-btn">
+    Ir al Menú
+</button>
+    </div>
+
+    <div class="location">
+        <h3>Nuestra Ubicación</h3>
+        <p>Colombia 2451, Belgrano, Guaymallén, Mendoza, Argentina</p>
+
+        <iframe
+            src="https://www.google.com/maps?q=Colombia+2451+Belgrano+Guaymallen+Mendoza+Argentina&output=embed"
+            width="100%"
+            height="250"
+            style="border:0; border-radius:10px;"
+            allowfullscreen=""
+            loading="lazy">
+        </iframe>
+    </div>
+
+    <div class="hours">
+        <h3>Horarios de Atención</h3>
+        <ul>
+            <li><strong>Lunes:</strong> 21:00 a 01:00</li>
+            <li><strong>Martes:</strong> Cerrado</li>
+            <li><strong>Miércoles:</strong> Cerrado</li>
+            <li><strong>Jueves:</strong> 20:30 a 01:00</li>
+            <li><strong>Viernes:</strong> 20:30 a 01:00</li>
+            <li><strong>Sábado:</strong> 20:30 a 01:30</li>
+            <li><strong>Domingo:</strong> 20:30 a 01:00</li>
+        </ul>
+    </div>
+
+
+
+
+</section>
+
+<div class="carousel" id="carousel">
+    <img src="src/img/big-monster-double.jpg" class="active">
+    <img src="src/img/f768x1-82840_82967_5050 (1)-Photoroom.jpg" class="active">
+    <img src="src/img/hamburpizza-alianze.jpeg">
+    <img src="src/img/vianda-mila.jpeg">
+    <img src="src/img/lomo-pan-frances.jpg">
+</div>
+
+<section class="note">
+"En Orgullo Argentino nos esforzamos al máximo para que nuestros clientes lleven la mejor atención, calidad y sabor en todos nuestros platos".
+</section>
+
+<section class="menu-wrapper" id="menu">
+    <h2 class="menu-title">MENÚ</h2>
+    <div class="menu-sections">
+
+    <div class="logo-card" onclick="openModal('Pizzas')">
+        <img src="src/img/logo/dallitalia_logo-Photoroom.png" alt="Pizzas">
+    </div>
+
+    <div class="logo-card" onclick="openModal('Burgers')">
+        <img src="src/img/logo/big_monster_logo-Photoroom.png" alt="Burgers">
+    </div>
+
+    <div class="logo-card" onclick="openModal('Minutas')">
+        <img src="src/img/logo/minutas_logo-Photoroom.png" alt="Minutas">
+    </div>
+
+    <div class="logo-card" onclick="openModal('Vianda')">
+        <img src="src/img/logo/viandas_logo-Photoroom.png" alt="Vianda">
+    </div>
+
+    <div class="logo-card" onclick="openModal('Empanadas')">
+        <img src="src/img/logo/empanadas_logo-Photoroom.png" alt="Empanadas">
+    </div>
+
+    <div class="logo-card" onclick="openModal('Super Combos')">
+        <img src="src/img/logo/super-combos_logo-Photoroom.png" alt="Super Combos">
+    </div>
+
+    <div class="logo-card" onclick="openModal('Topping')">
+        <img src="src/img/logo/mrfries_logo-Photoroom.png" alt="Topping">
+
+</div>
+</section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <div class="close" onclick="closeModal()">✖</div>
+        <h3 id="modalTitle"></h3>
+        <div id="modalItems"></div>
+    </div>
+</div>
+
+<section class="cart">
+    <h2>Carrito</h2>
+    <ul id="cartList"></ul>
+    <div class="total">Total: $<span id="total">0</span></div>
+    <br>
+    <div class="client-data">
+
+    <input type="text" id="clienteNombre" placeholder="Tu nombre *" required>
+
+    <input type="text" id="clienteDireccion" placeholder="Tu dirección *" required>
+
+    <textarea id="clienteInfoExtra"
+        placeholder="Descripción del lugar (opcional) Ej: Casa portón negro, timbre azul">
+    </textarea>
+
+</div>
+    <button onclick="enviarWhatsApp()">Enviar Pedido por WhatsApp</button>
+    <br><br>
+<button onclick="limpiarCarrito()" style="background:#555;">
+    Limpiar Lista
+</button>
+</section>
+
+<script>
+/* CARRUSEL */
+let slides=document.querySelectorAll(".carousel img");
+let index=0;
+setInterval(()=>{
+    slides[index].classList.remove("active");
+    index=(index+1)%slides.length;
+    slides[index].classList.add("active");
+},4000);
+
+/* DATA */
+const data={
+"Pizzas":[["Muzzarella",9000],["Doble Muzza",12000],["Napolitana",11500],["Selvaggio",12500],["Salami",13500],["Especial de Jamon",15000]],
+"Burgers":{
+    "EPIC":[
+        ["Draco Flame BIG",10000],
+        ["Draco Flame DOUBLE",13500],
+        ["Special BIG",10000],
+        ["Special DOUBLE",13500]
+    ],
+    "RARE":[
+        ["Viking BIG",8500],
+        ["Viking DOUBLE",12000],
+        ["Cowboy BIG",8500],
+        ["Cowboy DOUBLE",12000],
+        ["Crispy BIG",8000],
+        ["Crispy DOUBLE",11500],
+        ["Owen BIG",8500],
+        ["Owen DOUBLE",12000]
+    ],
+    "COMMON":[
+        ["Standard BIG",7500],
+        ["Standard DOUBLE",11000],
+        ["Revenge BIG",7500],
+        ["Revenge DOUBLE",11000]
+    ]
+},
+"Minutas":[["Lomito Simple",12900],["Lomito c/Queso",13800],["Lomito Especial",15700],["Lomito Especial c/Criolla",16700],["Sandwich Milanesa",7500]],
+"Vianda":[["Mila a la Napo",8500],["Ensalada Cesar/cruton/Pollo",6500],["Ensalada Mixta mas Bife",6500],["Tallarines c/Bolognesa",6500]],
+"Empanadas":[["Doc. Carne",9500],["Doc. JyQ",12000],["Doc. Capresse",10500],["Doc. pastel frito de carne",11000]],
+"Super Combos":[["Media-Hamburpizza c/papas grandes",10000],["Medio-Lomopizzas c/papas grandes",11000],["5xMila a la Napo(vianda)",42000],["5xBurger Viking c/papas grandes",50000]],
+"Topping":[["Papas Grandes",8500],["Papas Medianas",6500],["Papas Chicas",3500],["Papas grandes c/Cheddar ",12000]]
+};
+
+function openModal(section){
+
+    document.getElementById("modalTitle").innerText = section;
+
+    if(section === "Burgers"){
+
+        document.getElementById("modalItems").innerHTML = `
+            <div class="item epic-line" onclick="openBurgerLine('EPIC')">
+                <span>EPIC</span>
+            </div>
+
+            <div class="item rare-line" onclick="openBurgerLine('RARE')">
+                <span>RARE</span>
+            </div>
+
+            <div class="item common-line" onclick="openBurgerLine('COMMON')">
+                <span>COMMON</span>
+            </div>
+        `;
+
+    } else {
+
+        document.getElementById("modalItems").innerHTML =
+            data[section].map(item=>`
+                <div class="item" onclick="addToCart('${item[0]}',${item[1]} , event)">
+                    <span>${item[0]}</span>
+                    <span>
+                        $${item[1]}
+                        <small class="qty" data-name="${item[0]}"></small>
+                    </span>
+                </div>
+            `).join("");
+
+        // 🔥 IMPORTANTE
+        updateModalQuantities();
+    }
+
+    document.getElementById("modal").classList.add("active");
+}
+function openBurgerLine(line){
+
+    document.getElementById("modalTitle").innerText="Burgers - " + line;
+
+    document.getElementById("modalItems").innerHTML=
+        data["Burgers"][line].map(item=>`
+            <div class="item" onclick="addToCart('${item[0]}',${item[1]} , event)">
+    <span>${item[0]}</span>
+    <span>
+        $${item[1]}
+        <small class="qty" data-name="${item[0]}"></small>
+    </span>
+</div>
+        `).join("");
+}
+function updateModalQuantities(){
+
+    document.querySelectorAll(".qty").forEach(qtyEl=>{
+
+        const name=qtyEl.getAttribute("data-name");
+
+        if(cart[name]){
+            qtyEl.innerText=" x"+cart[name].quantity;
+        } else {
+            qtyEl.innerText="";
+        }
+
+    });
+}
+function closeModal(){
+    document.getElementById("modal").classList.remove("active");
+}
+
+let cart={}; // ahora será un objeto
+let total=0;
+
+function addToCart(name,price,event){
+
+    const element = event.currentTarget;
+
+    element.classList.add("flash");
+
+    setTimeout(()=>{
+        element.classList.remove("flash");
+    },600);
+
+    if(cart[name]){
+        cart[name].quantity++;
+    } else {
+        cart[name]={
+            price:price,
+            quantity:1
+        };
+    }
+
+    updateCart();
+    updateModalQuantities();
+}
+function updateCart(){
+
+    let newTotal = 0;
+
+    document.getElementById("cartList").innerHTML =
+        Object.keys(cart).map(name=>{
+
+            const item = cart[name];
+            const subtotal = item.price * item.quantity;
+            newTotal += subtotal;
+
+            return `<li>
+                ${name} x${item.quantity} - $${subtotal}
+            </li>`;
+        }).join("");
+
+    document.getElementById("total").innerText = newTotal;
+}
+function enviarWhatsApp(){
+
+    if(Object.keys(cart).length === 0){
+        alert("Carrito vacío");
+        return;
+    }
+
+    const nombre = document.getElementById("clienteNombre").value.trim();
+    const direccion = document.getElementById("clienteDireccion").value.trim();
+    const infoExtra = document.getElementById("clienteInfoExtra").value.trim();
+
+    // VALIDACIONES
+    if(nombre === ""){
+        alert("Por favor ingrese su nombre");
+        return;
+    }
+
+    if(direccion === ""){
+        alert("Por favor ingrese su dirección");
+        return;
+    }
+
+    let mensaje = "Hola, quiero pedir:%0A%0A";
+    let totalPedido = 0;
+
+Object.keys(cart).forEach(name=>{
+    const item = cart[name];
+    const subtotal = item.price * item.quantity;
+    totalPedido += subtotal;
+
+    mensaje += `- ${name} x${item.quantity} $${subtotal}%0A`;
+});
+
+mensaje += `%0ATotal: $${totalPedido} (No incluye gastos de envio)%0APrecios validos de 01/03/26 a 01/04/26%0A`;
+
+    mensaje += `Nombre: ${nombre}%0A`;
+    mensaje += `Dirección: ${direccion}%0A`;
+
+    if(infoExtra !== ""){
+        mensaje += `Info extra: ${infoExtra}%0A`;
+    }
+
+    window.open(`https://wa.me/5492615997762?text=${mensaje}`,"_blank");
+}
+function irAlMenu(){
+    document.getElementById("menu").scrollIntoView({
+        behavior:"smooth"
+    });
+}
+function limpiarCarrito(){
+    cart = {};
+    document.getElementById("cartList").innerHTML = "";
+    document.getElementById("total").innerText = "0";
+    updateModalQuantities();
+}
+/* Cerrar modal al tocar fuera */
+document.getElementById("modal").addEventListener("click",function(e){
+    if(e.target===this){closeModal();}
+});
+const premiumText = document.getElementById("premiumText");
+
+premiumText.addEventListener("animationend", function(e){
+    if(e.animationName === "handwriting"){
+        setTimeout(()=>{
+            document.getElementById("about").scrollIntoView({
+                behavior:"smooth"
+            });
+        }, 500);
+    }
+});
+</script>
+
+</body>
+</html>>
